@@ -4,7 +4,7 @@ pipeline {
         stage('Code Linting') {
             steps {
                 sh 'pip3 install flake8 --break-system-packages'
-                sh 'flake8 app.py --max-line-length=120'
+                sh '/home/ubuntu/.local/bin/flake8 app.py --max-line-length=120'
             }
         }
         stage('Code Build') {
@@ -23,7 +23,7 @@ pipeline {
         stage('Containerized Selenium Testing') {
             steps {
                 sh "docker build -f Dockerfile.test -t myapp-tests:${BUILD_NUMBER} ."
-                sh 'docker run --rm --network host myapp-tests:latest'
+                sh "docker run --rm --network host myapp-tests:${BUILD_NUMBER}"
             }
         }
     }
