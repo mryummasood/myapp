@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import sqlite3
 
+
 app = Flask(__name__)
+
 
 def init_db():
     conn = sqlite3.connect('database.db')
@@ -9,9 +11,11 @@ def init_db():
     conn.commit()
     conn.close()
 
+
 @app.route('/')
 def home():
     return '<h1>Welcome to My App</h1>'
+
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -28,6 +32,7 @@ def submit():
             <button id="submit-btn" type="submit">Submit</button>
         </form>
     '''
+
 
 if __name__ == '__main__':
     init_db()
